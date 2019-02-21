@@ -1,23 +1,41 @@
+package ProyectoPrueba.ProyectoPrueba;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.nio.file.Paths;
 import java.util.List;
 
 public class FindElementsExample {
 
-    private final static String url = "http://173.1.0.126/pages/example.html";
+    private final static String url = "http://www.yapo.cl";
 
     public static void main(String[] args) throws Exception {
-        String path = Paths.get(System.getProperty("user.dir"), "src/main/resources/drivers/chromedriver").toString();
+        String path = Paths.get(System.getProperty("user.dir"), "./Driver/chromedriver.exe").toString();
         System.setProperty("webdriver.chrome.driver", path);
         WebDriver driver = new ChromeDriver();
         driver.get(url);
+        Thread.sleep(9000);
+        WebElement btnPublicar;
+        //btnPublicar = driver.findElement(By.cssSelector(".btn span"));
+        btnPublicar = driver.findElement(By.xpath("//*[@class='btn btn-da-insert animated icon-ad-insert btn-home tealium-click']"));
+        btnPublicar.getText();
+        System.out.println(btnPublicar.getText());
+        btnPublicar.click();
+        
         Thread.sleep(5000);
+        WebElement ltCategoria;
+        ltCategoria = driver.findElement(By.id("category_group"));
+        Select lista = new Select(ltCategoria);
+        lista.selectByVisibleText("Motos");
+        
+        Thread.sleep(5000);
+        
         // find element by id
-        WebElement byId = driver.findElement(By.id("uno"));
+       /* WebElement byId = driver.findElement(By.id("uno"));
         System.out.println("Elemento por id:\n    " + byId.getAttribute("outerHTML") + "\n");
 
         // find element by name
@@ -71,7 +89,7 @@ public class FindElementsExample {
         List<WebElement> bysCssSelector2 = driver.findElements(By.cssSelector("ul>.lista"));
         for(WebElement e : bysCssSelector2) System.out.println("Elementos por xpath 2:\n    " + e.getAttribute("outerHTML"));
         System.out.println("\n");
-
+*/
         driver.close();
         driver.quit();
     }
